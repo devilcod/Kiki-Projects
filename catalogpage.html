@@ -4,21 +4,144 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/dist/output.css" rel="stylesheet">
+    <link href="input.css" rel="stylesheet">
     <title>Document</title>
     <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
 </head>
 <!-- Create By Joker Banny -->
 <body class="bg-white">
   <!-- Header Navbar -->
-<nav class="fixed top-0 left-0 z-20 w-full border-b border-gray-200 bg-white py-2.5 px-6 sm:px-4">
-  <div class="container mx-auto flex max-w-6xl flex-wrap items-center justify-start">
+<nav class="fixed top-0 left-0 z-10 w-full border-b border-gray-200 bg-white py-2.5 px-6 sm:px-4">
+  <div class="container mx-auto flex max-w-6xl flex-wrap items-center justify-between">
     <a href="#" class="flex items-center">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-3 h-6 text-blue-500 sm:h-9">
         <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
       </svg>
       <span class="self-center whitespace-nowrap text-xl font-semibold">Termcode</span>
     </a>
+
+    <!-- Cart Start -->
+<div x-data="{
+  open: false
+}">
+
+<Button x-on:click="open = !open">Cart</Button>
+
+<div class="relative z-10" x-show="open" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+  <!--
+    Background backdrop, show/hide based on slide-over state.
+
+    Entering: "ease-in-out duration-500"
+      From: "opacity-0"
+      To: "opacity-100"
+    Leaving: "ease-in-out duration-500"
+      From: "opacity-100"
+      To: "opacity-0"
+  -->
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+  <div class="fixed inset-0 overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+        <!--
+          Slide-over panel, show/hide based on slide-over state.
+
+          Entering: "transform transition ease-in-out duration-500 sm:duration-700"
+            From: "translate-x-full"
+            To: "translate-x-0"
+          Leaving: "transform transition ease-in-out duration-500 sm:duration-700"
+            From: "translate-x-0"
+            To: "translate-x-full"
+        -->
+        <div class="pointer-events-auto w-screen max-w-md">
+          <div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+            <div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+              <div class="flex items-start justify-between">
+                <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
+                <div class="ml-3 flex h-7 items-center">
+                  <button x-on:click="open =!open" type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
+                    <span class="sr-only">Close panel</span>
+                    <!-- Heroicon name: outline/x-mark -->
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <div class="flow-root">
+                  <ul role="list" class="-my-6 divide-y divide-gray-200">
+                    <li class="flex py-6">
+                      <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                        <img src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg" alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch." class="h-full w-full object-cover object-center">
+                      </div>
+
+                      <div class="ml-4 flex flex-1 flex-col">
+                        <div>
+                          <div class="flex justify-between text-base font-medium text-gray-900">
+                            <h3>
+                              <a href="#">Medium Stuff Satchel</a>
+                            </h3>
+                            <p class="ml-4">$32.00</p>
+                          </div>
+                          <p class="mt-1 text-sm text-gray-500">Blue</p>
+                        </div>
+                        <div class="flex flex-1 items-end justify-between text-sm">
+                          <p class="text-gray-500">Qty 1</p>
+
+                          <div class="flex gap-4">
+                            <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                            </button>
+                            <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    
+                    <!-- More products... -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+              <div class="flex justify-between text-base font-medium text-gray-900">
+                <p>Subtotal</p>
+                <p>$262.00</p>
+              </div>
+              <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+              <div class="mt-6">
+                <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+              </div>
+              <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+                <p>
+                  or
+                  <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    Continue Shopping
+                    <span aria-hidden="true"> &rarr;</span>
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<!-- Cart End -->
     
 
     
@@ -51,6 +174,8 @@
     </div> -->
   </div>
 </nav>
+
+
 
 
 
@@ -99,12 +224,15 @@
     products: {
       1: { id: '1', name: 'Bacarrate', price: '65000', src:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'},
       2: { id: '2', name: 'Pacorabani', price: '67000', src:'https://images.unsplash.com/photo-1523293182086-7651a899d37f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'}
+    },
+    show:{
+      open: false,
+      id: ''
     }
   }">
-    <ul class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <template x-for="id in Object.keys(products)" :keys="id">
-        <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
-          <a href="#">
+    <ul class="mx-auto grid max-w-6xl grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <template x-for="id in Object.keys(products)" :keys="product.id">
+        <article x-on:click="show.open = !show.open" @click="handleclick($event, $dispatch)" class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
             <div class="relative flex items-end overflow-hidden rounded-xl">
               <img x-bind:src="products[id].src" alt="Hotel Photo" />
               <div class="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
@@ -135,12 +263,44 @@
                 </div>
               </div>
             </div>
-          </a>
         </article>
       </template>
+      <!-- Modal Product Start -->
+    <div x-data x-on:click="show.open = !show.open" x-show="show.open" x-transition.opacity x-transition:enter.duration.500ms x-transition:leave.duration.400ms class="fixed h-screen w-full bg-black bg-opacity-80 z-20 top-0 left-0 flex items-center justify-center">
+        <div class="bg-white h-4/5 w-4/5 rounded-2xl px-8 py-6 flex flex-row items-center justify-start gap-10">
+          <div class="">
+            <img x-bind:src="$event.src" alt="Hotel Photo" class="max-w-sm"/>
+          </div>
+          
+        <div class="mt-1 p-2 flex justify-center items-start flex-col w-full gap-y-4">
+          <h2 x-text="products[id].name" class="text-slate-700"></h2>
+          <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad distinctio quidem officiis impedit nam tempora doloribus deleniti, mollitia, voluptatibus autem recusandae praesentium cum culpa minima vero odio nisi hic temporibus.</p>
+
+          <p>
+            <span class="text-sm text-slate-400">Rp. </span>
+            <span class="text-lg font-bold text-blue-500">67.000</span>
+          </p>
+
+          <div class="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+            </svg>
+
+            <button class="text-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+    
+    <!-- Modal Product End -->
     </ul>
+      
+    
+  
   </div>
 </section>
+
 
 
 
@@ -179,6 +339,16 @@
 	</div>
 </footer>
 
-  
+<!-- <script>
+  function modal(){
+    return {
+      outputproduct: '',
+      handleclick(e, $dispatch){
+        this.output =
+      }
+    }
+  }
+</script> -->
+
 </body>
 </html>
