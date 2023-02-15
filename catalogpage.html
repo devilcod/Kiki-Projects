@@ -8,7 +8,6 @@
     <title>Document</title>
     <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
 </head>
-<!-- Create By Joker Banny -->
 <body class="bg-white">
   <!-- Header Navbar -->
 <nav class="fixed top-0 left-0 z-10 w-full border-b border-gray-200 bg-white py-2.5 px-6 sm:px-4">
@@ -27,7 +26,14 @@
 
 <Button x-on:click="open = !open">Cart</Button>
 
-<div class="relative z-10" x-show="open" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+<div class="relative z-10" x-show="open" aria-labelledby="slide-over-title" role="dialog" aria-modal="true"
+  x-transition:enter="transition ease-out duration-500"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-500"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+>
   <!--
     Background backdrop, show/hide based on slide-over state.
 
@@ -38,11 +44,12 @@
       From: "opacity-100"
       To: "opacity-0"
   -->
-  <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+  <div class="fixed inset-0 bg-gray-500 bg-opacity-75"></div>
 
   <div class="fixed inset-0 overflow-hidden">
     <div class="absolute inset-0 overflow-hidden">
-      <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
+      <div class="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10"
+      >
         <!--
           Slide-over panel, show/hide based on slide-over state.
 
@@ -124,7 +131,7 @@
               <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
                 <p>
                   or
-                  <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
+                  <button x-on:click="open =!open" type="button" class="font-medium text-indigo-600 hover:text-indigo-500">
                     Continue Shopping
                     <span aria-hidden="true"> &rarr;</span>
                   </button>
@@ -225,16 +232,22 @@
       1: { id: '1', name: 'Bacarrate', price: '65000', src:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'},
       2: { id: '2', name: 'Pacorabani', price: '67000', src:'https://images.unsplash.com/photo-1523293182086-7651a899d37f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'}
     },
+    selectedId: null,
+    isOpen: false,
     show:{
       open: false,
-      id: ''
+    },
+
+    getId(id) {
+      this.selectedId = id
+      this.isOpen = true
     }
   }">
     <ul class="mx-auto grid max-w-6xl grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      <template x-for="id in Object.keys(products)" :keys="product.id">
-        <article x-on:click="show.open = !show.open" @click="handleclick($event, $dispatch)" class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
+      <template x-for="id in Object.keys(products)" :keys="products.id" >
+        <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
             <div class="relative flex items-end overflow-hidden rounded-xl">
-              <img x-bind:src="products[id].src" alt="Hotel Photo" />
+              <img @click="getId(id)" x-bind:src="products[id].src" class="cursor-pointer" x-ref="ImageUrl" alt="Hotel Photo" />
               <div class="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
@@ -266,14 +279,21 @@
         </article>
       </template>
       <!-- Modal Product Start -->
-    <div x-data x-on:click="show.open = !show.open" x-show="show.open" x-transition.opacity x-transition:enter.duration.500ms x-transition:leave.duration.400ms class="fixed h-screen w-full bg-black bg-opacity-80 z-20 top-0 left-0 flex items-center justify-center">
+    <div x-show="isOpen" class="fixed h-screen w-full bg-black bg-opacity-80 z-20 top-0 left-0 flex items-center justify-center"
+      x-transition:enter="transition ease-out duration-500"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition ease-in duration-500"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0">
         <div class="bg-white h-4/5 w-4/5 rounded-2xl px-8 py-6 flex flex-row items-center justify-start gap-10">
-          <div class="">
-            <img x-bind:src="$event.src" alt="Hotel Photo" class="max-w-sm"/>
-          </div>
           
+          <div class="">
+            <img x-bind:src="products[selectedId].src" alt="Hotel Photo" class="max-w-sm"/>
+          </div>
+                 
         <div class="mt-1 p-2 flex justify-center items-start flex-col w-full gap-y-4">
-          <h2 x-text="products[id].name" class="text-slate-700"></h2>
+          <h2 x-text="products[selectedId].name" class="text-slate-700"></h2>
           <p class="mt-1 text-sm text-slate-400">Lisbon, Portugal</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad distinctio quidem officiis impedit nam tempora doloribus deleniti, mollitia, voluptatibus autem recusandae praesentium cum culpa minima vero odio nisi hic temporibus.</p>
 
@@ -281,13 +301,19 @@
             <span class="text-sm text-slate-400">Rp. </span>
             <span class="text-lg font-bold text-blue-500">67.000</span>
           </p>
-
-          <div class="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-            </svg>
-
-            <button class="text-sm">Add to cart</button>
+          <div class="flex flex-row w-full justify-between items-center">
+            <div class="flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-1.5 text-white duration-100 hover:bg-blue-600">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+              </svg>
+              <button class="text-sm">Add to cart</button>
+            </div>
+            <div x-on:click="isOpen = !isOpen" class="flex items-center space-x-1.5 rounded-lg bg-red-500 px-4 py-1.5 text-white duration-100 hover:bg-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              <button class="text-sm">Continue shopping</button>
+            </div>    
           </div>
         </div>
       </div>
@@ -309,7 +335,7 @@
 	<div class="container px-6 mx-auto space-y-6 divide-y divide-gray-400 md:space-y-12 divide-opacity-50">
 		<div class="grid justify-center  lg:justify-between">
 			<div class="flex flex-col self-center text-sm text-center md:block lg:col-start-1 md:space-x-6">
-				<span>Copy rgight © 2023 by codemix team </span>
+				<span>Copy rgight © 2023 Seeder </span>
 				<a rel="noopener noreferrer" href="#">
 					<span>Privacy policy</span>
 				</a>

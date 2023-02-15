@@ -10,23 +10,17 @@
   <div x-data="{
     isopen1: true,
     isopen2: false,
-    bg1: 'bg-blue-400',
-    bg2: 'bg-blue-200',
 
     open1(){
         if (this.isopen2 = true) {
             this.isopen1 = true
             this.isopen2 = false
-            this.bg1 = 'bg-blue-400'
-            this.bg2 = 'bg-blue-200'
         }
     },
     open2(){
         if (this.isopen1 = true) {
             this.isopen2 = true
             this.isopen1 = false
-            this.bg2 = 'bg-blue-400'
-            this.bg1 = 'bg-blue-200'
         }
     }
   }"
@@ -41,13 +35,13 @@
         <option value="">Reseller</option>
       </select>
     </div>
-    <h1 class="font-bold text-xl uppercase w-full text-center mt-8 mb-8">Shopping Cart</h1>
-    <div class="flex justify-between w-full">
-      <button @click="open1" x-bind:class="bg1" class="w-1/2 h-full py-4">List Product</button>
-      <button @click="open2" x-bind:class="bg2" class="w-1/2 h-full py-4">Cart Product</button>
+    <h1 class="font-bold text-xl uppercase w-full text-center mb-8">Shopping Cart</h1>
+    <div class="flex justify-between bg-blue-500 w-full">
+      <button @click="open1" class="bg-slate-300 w-1/2 h-full py-4">List Product</button>
+      <button @click="open2" class="bg-slate-500 w-1/2 h-full py-4">Cart Product</button>
     </div>
     <div class="mb-8">
-      <h1 class="text-lg font-semibold mt-4">All list Product</h1>
+      <h1 class="text-lg font-semibold">All list Product</h1>
       <input class="border-b shadow-sm py-2 focus:border-none" type="search" placeholder="Name product..." name="" id="">
     </div>
 
@@ -60,13 +54,12 @@
         <h1 class="w-1/6 ">Quantity</h1>
         <h1 class="w-1/6 ">Action</h1>
       </div>
-      <div class="flex items-center border-t mt-4 mb-4 py-8">
+      <div class="flex border-t mt-4 mb-4 py-8">
         <h2 class="w-2/6">Pacorabani</h2>
         <h2 class="w-1/6">Top Seller</h2>
         <h2 class="w-1/6">Men</h2>
-        <div class="flex justify-between pr-10 w-1/6">
-          <h2>Rp. </h2>
-          <h2>65.000</h2>
+        <div class="flex items-center w-1/6">
+          <h2>Rp. 20.000</h2>
         </div>
         <div class=" flex justify-start items-center w-1/6">
           <div class="flex justify-center py-1 px-0 rounded-md border-2 border-black w-1/2">
@@ -98,13 +91,12 @@
         <h1 class="w-1/6 ">Quantity</h1>
         <h1 class="w-1/6 ">Action</h1>
       </div>
-      <div class="flex items-center border-t mt-4 mb-4 py-8">
+      <div class="flex border-t mt-4 mb-4 py-8">
         <h2 class="w-2/6">Pacorabani</h2>
         <h2 class="w-1/6">Top Seller</h2>
         <h2 class="w-1/6">Men</h2>
-        <div class="flex items-center justify-between pr-10 w-1/6">
-          <h2>Rp.</h2>
-          <h2>65.000</h2>
+        <div class="flex items-center w-1/6">
+          <h2>Rp. 20.000</h2>
         </div>
         <div class=" flex justify-start items-center w-1/6">
           <div class="flex justify-center py-1 px-0 rounded-md border-2 border-black w-1/2">
@@ -165,18 +157,18 @@
       </div>
       <div class="flex flex-col w-1/3">
         <h1 class="text-lg font-bold uppercase mb-4">Order</h1>
-        <div class="flex justify-between">
+        <div class="flex">
           <div class="flex flex-col gap-3">
             <h2>Subtotal</h2>
             <p>Discount</p>
             <p>Delivery</p>
             <h2>Total</h2>
           </div>
-          <div class="flex flex-col justify-end items-end gap-3">
+          <div class="flex flex-col gap-3">
             <h2>Rp. 100.000</h2>
-            <p>(20%) Rp.  20.000</p>
-            <p>Rp.  60.000</p>
-            <h2>Rp. 140.000</h2>
+            <p>Discount</p>
+            <p>Delivery</p>
+            <h2>Total</h2>
           </div>
         </div>
 
